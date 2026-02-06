@@ -1,0 +1,242 @@
+/* FixMyPhone – Soft Tech Mint Theme */
+
+/* ===== Variables ===== */
+:root {
+    --mint: #2EC4B6;
+    --mint-dark: #25A89C;
+    --mint-light: #E8F8F5;
+    --bg: #F7F9FB;
+    --text: #1F2937;
+    --text-muted: #6B7280;
+    --card-shadow: 0 2px 16px rgba(46, 196, 182, 0.08);
+    --card-shadow-hover: 0 8px 30px rgba(46, 196, 182, 0.15);
+}
+
+/* ===== Global ===== */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+a {
+    color: var(--mint);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--mint-dark);
+}
+
+.fw-500 { font-weight: 500; }
+
+/* ===== Navbar ===== */
+.navbar {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+    padding: 0.75rem 0;
+}
+.navbar-brand {
+    color: var(--mint) !important;
+    font-size: 1.3rem;
+}
+.nav-link {
+    color: var(--text) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+.nav-link:hover {
+    background: var(--mint-light);
+    color: var(--mint) !important;
+}
+
+/* ===== Buttons ===== */
+.btn-mint {
+    background: var(--mint);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    transition: all 0.2s;
+}
+.btn-mint:hover {
+    background: var(--mint-dark);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(46, 196, 182, 0.3);
+}
+
+.btn-outline-mint {
+    border: 2px solid var(--mint);
+    color: var(--mint);
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 0.5rem 1.4rem;
+    background: transparent;
+    transition: all 0.2s;
+}
+.btn-outline-mint:hover {
+    background: var(--mint);
+    color: #fff;
+    border-color: var(--mint);
+}
+
+/* ===== Cards ===== */
+.service-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s;
+}
+.service-card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-3px);
+}
+
+.service-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--mint-light);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== Badge ===== */
+.bg-mint-badge {
+    background: var(--mint-light) !important;
+    color: var(--mint-dark) !important;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.35em 0.8em;
+}
+
+/* ===== Hero ===== */
+.hero-section {
+    padding: 4rem 0;
+}
+.min-vh-75 { min-height: 65vh; }
+
+.text-mint { color: var(--mint) !important; }
+.bg-mint { background-color: var(--mint) !important; }
+.bg-mint-light { background-color: var(--mint-light) !important; }
+
+.hero-illustration {
+    position: relative;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hero-icon {
+    font-size: 8rem;
+    color: var(--mint);
+    opacity: 0.15;
+}
+.hero-icon-secondary {
+    position: absolute;
+    font-size: 4rem;
+    color: var(--mint);
+    opacity: 0.4;
+    bottom: 30%;
+    right: 25%;
+}
+
+/* ===== Steps ===== */
+.step-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: visible;
+}
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--mint);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+/* ===== Progress ===== */
+.progress {
+    border-radius: 10px;
+    background: var(--mint-light);
+}
+.progress-bar.bg-mint {
+    background: var(--mint) !important;
+    border-radius: 10px;
+}
+
+/* ===== CTA Section ===== */
+.cta-section {
+    background: var(--mint-light);
+    border-radius: 0;
+}
+
+/* ===== Footer ===== */
+.footer-section {
+    background: #fff;
+    border-top: 1px solid #eee;
+}
+.footer-section a {
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+.footer-section a:hover {
+    color: var(--mint);
+}
+
+/* ===== About ===== */
+.about-illustration {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--mint-light);
+    border-radius: 20px;
+}
+
+/* ===== Forms ===== */
+.form-control, .form-select {
+    border-radius: 10px;
+    border-color: #e5e7eb;
+    padding: 0.65rem 1rem;
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--mint);
+    box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.15);
+}
+.form-control-lg, .form-select-lg {
+    border-radius: 12px;
+}
+
+/* ===== Table ===== */
+.table thead th {
+    border-bottom-width: 1px;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .hero-section { padding: 2rem 0; }
+    .min-vh-75 { min-height: auto; }
+    .hero-illustration { height: 150px; }
+    .hero-icon { font-size: 5rem; }
+    .hero-icon-secondary { font-size: 2.5rem; }
+    .display-4 { font-size: 2rem; }
+}
