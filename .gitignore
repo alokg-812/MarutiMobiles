@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+
+# Environment variables
+.env
+
+# Database
+repair_shop.db
+
+# User uploads
+static/uploads/*
+!static/uploads/.gitkeep
