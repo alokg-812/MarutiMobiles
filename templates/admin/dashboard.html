@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4"><i class="fas fa-tachometer-alt me-2 text-mint"></i>Admin Dashboard</h2>
+
+        <!-- Stats Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="card border-0 service-card">
+                    <div class="card-body p-4 text-center">
+                        <i class="fas fa-clipboard-list fa-2x text-mint mb-2"></i>
+                        <h3 class="fw-bold mb-0">{{ total }}</h3>
+                        <p class="text-muted mb-0">Total Repairs</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 service-card">
+                    <div class="card-body p-4 text-center">
+                        <i class="fas fa-tools fa-2x text-warning mb-2"></i>
+                        <h3 class="fw-bold mb-0">{{ active }}</h3>
+                        <p class="text-muted mb-0">Active Repairs</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 service-card">
+                    <div class="card-body p-4 text-center">
+                        <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
+                        <h3 class="fw-bold mb-0">{{ completed }}</h3>
+                        <p class="text-muted mb-0">Completed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="row mb-4">
+            <div class="col-lg-8 mx-auto">
+                <div class="card border-0 service-card">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3">Repairs by Status</h5>
+                        <canvas id="statusChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="row g-3">
+            <div class="col-md-6">
+                <a href="{{ url_for('admin.repairs') }}" class="card border-0 service-card text-decoration-none d-block">
+                    <div class="card-body p-4 d-flex align-items-center">
+                        <i class="fas fa-wrench fa-2x text-mint me-3"></i>
+                        <div>
+                            <h5 class="fw-bold mb-0">Manage Repairs</h5>
+                            <p class="text-muted mb-0">View and update all repair requests</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="{{ url_for('admin.customers') }}" class="card border-0 service-card text-decoration-none d-block">
+                    <div class="card-body p-4 d-flex align-items-center">
+                        <i class="fas fa-users fa-2x text-mint me-3"></i>
+                        <div>
+                            <h5 class="fw-bold mb-0">Manage Customers</h5>
+                            <p class="text-muted mb-0">View customer details and history</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+const ctx = document.getElementById('statusChart').getContext('2d');
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: {{ statuses|tojson }},
+        datasets: [{
+            data: {{ status_counts|tojson }},
+            backgroundColor: ['#2EC4B6', '#FFB347', '#FF6B6B', '#4ECDC4', '#95E1D3'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { position: 'bottom' }
+        }
+    }
+});
+</script>
+{% endblock %}

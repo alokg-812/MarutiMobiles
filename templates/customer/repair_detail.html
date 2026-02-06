@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Repair #{{ repair.id }}{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <a href="{{ url_for('customer.dashboard') }}" class="text-mint mb-3 d-inline-block"><i class="fas fa-arrow-left me-1"></i>Back to Dashboard</a>
+                <div class="card border-0 service-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="fw-bold mb-0">{{ repair.brand }} {{ repair.model }}</h3>
+                            <span class="badge bg-mint-badge fs-6">{{ repair.status }}</span>
+                        </div>
+
+                        <!-- Status Progress -->
+                        {% set statuses = ['Requested', 'Picked Up', 'Under Repair', 'Ready', 'Delivered'] %}
+                        {% set current_idx = statuses.index(repair.status) %}
+                        <div class="mb-4">
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-mint" style="width: {{ ((current_idx + 1) / 5 * 100)|int }}%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-1">
+                                {% for s in statuses %}
+                                <small class="{% if loop.index0 <= current_idx %}text-mint fw-bold{% else %}text-muted{% endif %}">{{ s }}</small>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <h6 class="fw-bold">Problem Description</h6>
+                        <p class="text-muted">{{ repair.problem }}</p>
+
+                        {% if repair.image_filename %}
+                        <h6 class="fw-bold">Uploaded Image</h6>
+                        <img src="{{ url_for('static', filename='uploads/' + repair.image_filename) }}" class="img-fluid rounded mb-3" style="max-height: 300px;">
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h6 class="fw-bold">Pickup Details</h6>
+                                <p class="text-muted mb-1"><i class="fas fa-map-marker-alt me-2"></i>{{ repair.pickup_address }}</p>
+                                <p class="text-muted mb-1"><i class="fas fa-calendar me-2"></i>{{ repair.pickup_date.strftime('%d %b %Y') }}</p>
+                                <p class="text-muted"><i class="fas fa-clock me-2"></i>{{ repair.pickup_time_slot }}</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <h6 class="fw-bold">Contact</h6>
+                                <p class="text-muted mb-1"><i class="fas fa-phone me-2"></i>{{ repair.contact_phone }}</p>
+                                <p class="text-muted"><i class="fas fa-envelope me-2"></i>{{ repair.contact_email }}</p>
+                            </div>
+                        </div>
+
+                        {% if repair.repair_cost %}
+                        <div class="mt-3 p-3 bg-mint-light rounded">
+                            <h6 class="fw-bold mb-0">Repair Cost: <span class="text-mint">₹{{ "%.0f"|format(repair.repair_cost) }}</span></h6>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

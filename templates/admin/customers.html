@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Customers{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Customers</h2>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Joined</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in customers %}
+                    <tr>
+                        <td class="fw-500">{{ c.full_name }}</td>
+                        <td class="text-muted">{{ c.email }}</td>
+                        <td class="text-muted">{{ c.phone or '—' }}</td>
+                        <td class="text-muted small">{{ c.created_at.strftime('%d %b %Y') }}</td>
+                        <td><a href="{{ url_for('admin.customer_detail', user_id=c.id) }}" class="btn btn-sm btn-outline-mint">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if not customers %}
+        <p class="text-center text-muted py-4">No customers yet.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

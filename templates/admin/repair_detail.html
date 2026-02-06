@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Repair #{{ repair.id }} - Admin{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <a href="{{ url_for('admin.repairs') }}" class="text-mint mb-3 d-inline-block"><i class="fas fa-arrow-left me-1"></i>Back to All Repairs</a>
+        <div class="row g-4">
+            <!-- Repair Info -->
+            <div class="col-lg-7">
+                <div class="card border-0 service-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="fw-bold mb-0">{{ repair.brand }} {{ repair.model }}</h3>
+                            <span class="badge bg-mint-badge fs-6">{{ repair.status }}</span>
+                        </div>
+                        <h6 class="fw-bold">Problem</h6>
+                        <p class="text-muted">{{ repair.problem }}</p>
+
+                        {% if repair.image_filename %}
+                        <img src="{{ url_for('static', filename='uploads/' + repair.image_filename) }}" class="img-fluid rounded mb-3" style="max-height: 250px;">
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h6 class="fw-bold">Pickup</h6>
+                                <p class="text-muted mb-1">{{ repair.pickup_address }}</p>
+                                <p class="text-muted mb-1">{{ repair.pickup_date.strftime('%d %b %Y') }} · {{ repair.pickup_time_slot }}</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <h6 class="fw-bold">Customer</h6>
+                                <p class="text-muted mb-1">{{ repair.customer.full_name }}</p>
+                                <p class="text-muted mb-1">{{ repair.contact_phone }}</p>
+                                <p class="text-muted">{{ repair.contact_email }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Update Form -->
+            <div class="col-lg-5">
+                <div class="card border-0 service-card">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3">Update Repair</h5>
+                        <form method="POST">
+                            {{ form.hidden_tag() }}
+                            <div class="mb-3">
+                                <label class="form-label fw-500">{{ form.status.label.text }}</label>
+                                {{ form.status(class="form-select form-select-lg") }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-500">{{ form.repair_cost.label.text }}</label>
+                                {{ form.repair_cost(class="form-control form-control-lg", placeholder="e.g. 1500") }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-500">{{ form.admin_notes.label.text }}</label>
+                                {{ form.admin_notes(class="form-control", rows="4", placeholder="Internal notes about this repair...") }}
+                            </div>
+                            <button type="submit" class="btn btn-mint btn-lg w-100">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

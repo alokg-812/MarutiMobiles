@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}All Repairs{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4">All Repair Requests</h2>
+
+        <!-- Filter -->
+        <div class="mb-3 d-flex gap-2 flex-wrap">
+            <a href="{{ url_for('admin.repairs') }}" class="btn btn-sm {% if not current_filter %}btn-mint{% else %}btn-outline-mint{% endif %}">All</a>
+            {% for s in ['Requested', 'Picked Up', 'Under Repair', 'Ready', 'Delivered'] %}
+            <a href="{{ url_for('admin.repairs', status=s) }}" class="btn btn-sm {% if current_filter == s %}btn-mint{% else %}btn-outline-mint{% endif %}">{{ s }}</a>
+            {% endfor %}
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Customer</th>
+                        <th>Device</th>
+                        <th>Status</th>
+                        <th>Cost</th>
+                        <th>Pickup Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for repair in repairs %}
+                    <tr>
+                        <td>{{ repair.id }}</td>
+                        <td>{{ repair.customer.full_name }}</td>
+                        <td class="fw-500">{{ repair.brand }} {{ repair.model }}</td>
+                        <td><span class="badge bg-mint-badge">{{ repair.status }}</span></td>
+                        <td>{% if repair.repair_cost %}₹{{ "%.0f"|format(repair.repair_cost) }}{% else %}—{% endif %}</td>
+                        <td class="text-muted small">{{ repair.pickup_date.strftime('%d %b %Y') }}</td>
+                        <td><a href="{{ url_for('admin.repair_detail', repair_id=repair.id) }}" class="btn btn-sm btn-outline-mint">Manage</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if not repairs %}
+        <p class="text-center text-muted py-4">No repair requests found.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

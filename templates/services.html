@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Services{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="text-center fw-bold mb-2">Our Repair Services</h1>
+        <p class="text-center text-muted mb-5">Expert repairs for all major brands — Apple, Samsung, OnePlus, Xiaomi & more</p>
+        <div class="row g-4">
+            {% set services = [
+                ('fa-mobile-screen', 'Screen Repair', 'Cracked, shattered, or unresponsive touchscreen? We use high-quality replacement screens to restore your display to perfect condition.', '₹999'),
+                ('fa-battery-full', 'Battery Replacement', 'If your phone drains too fast or won\'t hold charge, we replace the battery with a premium cell that lasts all day.', '₹699'),
+                ('fa-droplet', 'Water Damage Recovery', 'Accidentally dropped your phone in water? Our ultrasonic cleaning and component-level repair can save your device.', '₹1,499'),
+                ('fa-plug', 'Charging Port Fix', 'Loose, corroded, or non-functional charging port? We repair or replace the port for reliable charging.', '₹499'),
+                ('fa-camera', 'Camera Module Repair', 'Blurry photos, black screen, or cracked lens? We replace camera modules to restore crisp photography.', '₹799'),
+                ('fa-volume-up', 'Speaker & Mic Repair', 'Muffled audio or mic not working during calls? We fix speakers, earpieces, and microphones.', '₹399'),
+                ('fa-microchip', 'Motherboard Repair', 'For complex issues like boot loops, no power, or data recovery — our technicians handle board-level repairs.', '₹1,999'),
+                ('fa-shield-halved', 'Back Panel Replacement', 'Cracked glass back? We replace it with OEM-quality panels to make your phone look brand new.', '₹799'),
+                ('fa-sim-card', 'SIM & Network Issues', 'SIM not detected or no network? We diagnose and fix SIM tray and antenna issues.', '₹399')
+            ] %}
+            {% for icon, title, desc, price in services %}
+            <div class="col-md-4 col-sm-6">
+                <div class="card service-card h-100 border-0">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="service-icon-wrap me-3">
+                                <i class="fas {{ icon }} fa-lg text-mint"></i>
+                            </div>
+                            <h5 class="fw-bold mb-0">{{ title }}</h5>
+                        </div>
+                        <p class="text-muted">{{ desc }}</p>
+                        <p class="fw-bold text-mint mb-0">Starting from {{ price }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5">
+            <p class="text-muted mb-3">Can't find your issue? Don't worry — we handle all types of phone repairs.</p>
+            <a href="{{ url_for('customer.book_repair') }}" class="btn btn-mint btn-lg px-4">
+                <i class="fas fa-wrench me-2"></i>Book a Repair
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

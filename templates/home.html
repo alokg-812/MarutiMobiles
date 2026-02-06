@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<!-- Hero -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-75">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h1 class="display-4 fw-bold mb-3">Your Phone Deserves<br><span class="text-mint">Expert Care</span></h1>
+                <p class="lead text-muted mb-4">Cracked screen? Dead battery? Water damage? We pick up, repair, and deliver — hassle-free.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="{{ url_for('customer.book_repair') }}" class="btn btn-mint btn-lg px-4">
+                        <i class="fas fa-wrench me-2"></i>Repair My Phone
+                    </a>
+                    <a href="{{ url_for('main.how_it_works') }}" class="btn btn-outline-mint btn-lg px-4">How It Works</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="hero-illustration">
+                    <i class="fas fa-mobile-alt hero-icon"></i>
+                    <i class="fas fa-tools hero-icon-secondary"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<section class="py-5 bg-mint-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 col-6 mb-3">
+                <h2 class="fw-bold text-mint mb-0">1200+</h2>
+                <p class="text-muted">Phones Repaired</p>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <h2 class="fw-bold text-mint mb-0">98%</h2>
+                <p class="text-muted">Happy Customers</p>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <h2 class="fw-bold text-mint mb-0">24hr</h2>
+                <p class="text-muted">Avg. Turnaround</p>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <h2 class="fw-bold text-mint mb-0">90 Day</h2>
+                <p class="text-muted">Warranty</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Preview -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-2">Our Repair Services</h2>
+        <p class="text-center text-muted mb-5">We fix all major phone brands and issues</p>
+        <div class="row g-4">
+            {% set services = [
+                ('fa-mobile-screen', 'Screen Repair', 'Cracked or unresponsive screen? We replace it with genuine quality parts.'),
+                ('fa-battery-full', 'Battery Replacement', 'Phone dying too fast? Get a fresh battery and all-day power back.'),
+                ('fa-droplet', 'Water Damage', 'Dropped your phone in water? Our experts recover water-damaged devices.'),
+                ('fa-plug', 'Charging Port', 'Loose or broken charging port? We repair and replace charging components.'),
+                ('fa-camera', 'Camera Repair', 'Blurry or broken camera? We restore your phone\'s photography capability.'),
+                ('fa-volume-up', 'Speaker & Mic', 'Can\'t hear or be heard? We fix speakers, microphones, and earpieces.')
+            ] %}
+            {% for icon, title, desc in services %}
+            <div class="col-md-4 col-sm-6">
+                <div class="card service-card h-100 border-0">
+                    <div class="card-body text-center p-4">
+                        <div class="service-icon-wrap mb-3">
+                            <i class="fas {{ icon }} fa-2x text-mint"></i>
+                        </div>
+                        <h5 class="fw-bold">{{ title }}</h5>
+                        <p class="text-muted mb-0">{{ desc }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('main.services') }}" class="btn btn-outline-mint">View All Services</a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-3">Ready to Get Your Phone Fixed?</h2>
+        <p class="mb-4 text-muted">Book a repair in under 2 minutes. We'll pick it up from your doorstep.</p>
+        <a href="{{ url_for('customer.book_repair') }}" class="btn btn-mint btn-lg px-5">
+            <i class="fas fa-calendar-check me-2"></i>Book a Repair Now
+        </a>
+    </div>
+</section>
+{% endblock %}

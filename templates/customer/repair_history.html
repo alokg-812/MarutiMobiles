@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Repair History{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Repair History</h2>
+        {% if repairs %}
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Device</th>
+                        <th>Issue</th>
+                        <th>Status</th>
+                        <th>Cost</th>
+                        <th>Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for repair in repairs %}
+                    <tr>
+                        <td>{{ repair.id }}</td>
+                        <td class="fw-500">{{ repair.brand }} {{ repair.model }}</td>
+                        <td class="text-muted">{{ repair.problem[:50] }}{% if repair.problem|length > 50 %}...{% endif %}</td>
+                        <td><span class="badge bg-mint-badge">{{ repair.status }}</span></td>
+                        <td>{% if repair.repair_cost %}₹{{ "%.0f"|format(repair.repair_cost) }}{% else %}—{% endif %}</td>
+                        <td class="text-muted small">{{ repair.created_at.strftime('%d %b %Y') }}</td>
+                        <td><a href="{{ url_for('customer.repair_detail', repair_id=repair.id) }}" class="btn btn-sm btn-outline-mint">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="card border-0 service-card text-center py-5">
+            <p class="text-muted mb-2">No repair history yet.</p>
+            <a href="{{ url_for('customer.book_repair') }}" class="btn btn-mint">Book Your First Repair</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

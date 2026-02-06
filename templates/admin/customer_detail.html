@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}{{ customer.full_name }}{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <a href="{{ url_for('admin.customers') }}" class="text-mint mb-3 d-inline-block"><i class="fas fa-arrow-left me-1"></i>Back to Customers</a>
+        <div class="card border-0 service-card mb-4">
+            <div class="card-body p-4">
+                <h3 class="fw-bold">{{ customer.full_name }}</h3>
+                <p class="text-muted mb-1"><i class="fas fa-envelope me-2"></i>{{ customer.email }}</p>
+                <p class="text-muted mb-1"><i class="fas fa-phone me-2"></i>{{ customer.phone or 'Not provided' }}</p>
+                <p class="text-muted"><i class="fas fa-calendar me-2"></i>Member since {{ customer.created_at.strftime('%d %b %Y') }}</p>
+            </div>
+        </div>
+
+        <h4 class="fw-bold mb-3">Repair History ({{ repairs|length }})</h4>
+        {% if repairs %}
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Device</th>
+                        <th>Status</th>
+                        <th>Cost</th>
+                        <th>Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for repair in repairs %}
+                    <tr>
+                        <td>{{ repair.id }}</td>
+                        <td class="fw-500">{{ repair.brand }} {{ repair.model }}</td>
+                        <td><span class="badge bg-mint-badge">{{ repair.status }}</span></td>
+                        <td>{% if repair.repair_cost %}₹{{ "%.0f"|format(repair.repair_cost) }}{% else %}—{% endif %}</td>
+                        <td class="text-muted small">{{ repair.created_at.strftime('%d %b %Y') }}</td>
+                        <td><a href="{{ url_for('admin.repair_detail', repair_id=repair.id) }}" class="btn btn-sm btn-outline-mint">Manage</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted">No repairs from this customer.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
