@@ -39,20 +39,30 @@ class User(UserMixin, db.Model):
 class RepairRequest(db.Model):
     __tablename__ = 'repair_requests'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True) # Made nullable for guest bookings
+    full_name = db.Column(db.String(100), nullable=True) # Store name for guest bookings
     brand = db.Column(db.String(50), nullable=False)
     model = db.Column(db.String(100), nullable=False)
     problem = db.Column(db.Text, nullable=False)
     image_filename = db.Column(db.String(200), nullable=True)
     pickup_address = db.Column(db.String(300), nullable=False)
-    pickup_date = db.Column(db.Date, nullable=False)
-    pickup_time_slot = db.Column(db.String(30), nullable=False)
+    pickup_date = db.Column(db.Date, nullable=True) # Made optional for quick booking
+    pickup_time_slot = db.Column(db.String(30), nullable=True) # Made optional for quick booking
     contact_phone = db.Column(db.String(20), nullable=False)
-    contact_email = db.Column(db.String(120), nullable=False)
-    status = db.Column(db.String(20), default='Requested')  # Requested, Picked Up, Under Repair, Ready, Delivered
+    contact_email = db.Column(db.String(120), nullable=True) # Made optional
+    status = db.Column(db.String(20), default='Requested')
     repair_cost = db.Column(db.Float, nullable=True)
     admin_notes = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    STATUS_CHOICES = ['Requested', 'Picked Up', 'Under Repair', 'Ready', 'Delivered']
+class Feedback(db.Model):
+    __tablename__ = 'feedbacks'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+    rating = db.Column(db.Integer, nullable=False, default=5)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<Feedback {self.name}>'

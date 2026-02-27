@@ -4,7 +4,7 @@ from flask_login import LoginManager
 from config import Config
 from models import db, User, Role
 
-# --------------------
+# --------------------venv\Scripts\activate
 # Login Manager setup
 # --------------------
 login_manager = LoginManager()

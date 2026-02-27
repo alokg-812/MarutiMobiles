@@ -2,41 +2,55 @@
 {% block title %}Repair History{% endblock %}
 {% block content %}
 <section class="py-5">
-    <div class="container">
-        <h2 class="fw-bold mb-4">Repair History</h2>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="display-font text-white mb-0">REPAIR <span class="neon-text">LOGS</span></h2>
+            <p class="text-muted small mb-0 display-font">ACCESS LEVEL: USER</p>
+        </div>
+
         {% if repairs %}
-        <div class="table-responsive">
-            <table class="table table-hover align-middle">
-                <thead class="table-light">
-                    <tr>
-                        <th>#</th>
-                        <th>Device</th>
-                        <th>Issue</th>
-                        <th>Status</th>
-                        <th>Cost</th>
-                        <th>Date</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for repair in repairs %}
-                    <tr>
-                        <td>{{ repair.id }}</td>
-                        <td class="fw-500">{{ repair.brand }} {{ repair.model }}</td>
-                        <td class="text-muted">{{ repair.problem[:50] }}{% if repair.problem|length > 50 %}...{% endif %}</td>
-                        <td><span class="badge bg-mint-badge">{{ repair.status }}</span></td>
-                        <td>{% if repair.repair_cost %}₹{{ "%.0f"|format(repair.repair_cost) }}{% else %}—{% endif %}</td>
-                        <td class="text-muted small">{{ repair.created_at.strftime('%d %b %Y') }}</td>
-                        <td><a href="{{ url_for('customer.repair_detail', repair_id=repair.id) }}" class="btn btn-sm btn-outline-mint">View</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <div class="cyber-card p-0 overflow-hidden">
+            <div class="table-responsive">
+                <table class="table table-dark table-hover mb-0 align-middle" style="background: transparent;">
+                    <thead style="background: rgba(106, 13, 173, 0.1);">
+                        <tr>
+                            <th class="display-font text-white fs-xs py-3 ps-4" style="font-size: 0.6rem;">ID</th>
+                            <th class="display-font text-white fs-xs py-3" style="font-size: 0.6rem;">ARCHITECTURE</th>
+                            <th class="display-font text-white fs-xs py-3" style="font-size: 0.6rem;">ANOMALY</th>
+                            <th class="display-font text-white fs-xs py-3" style="font-size: 0.6rem;">STATE</th>
+                            <th class="display-font text-white fs-xs py-3" style="font-size: 0.6rem;">CREDITS</th>
+                            <th class="display-font text-white fs-xs py-3" style="font-size: 0.6rem;">TIMESTAMP</th>
+                            <th class="display-font text-white fs-xs py-3 pe-4" style="font-size: 0.6rem;">SYNC</th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-top-0">
+                        {% for repair in repairs %}
+                        <tr style="border-bottom: 1px solid rgba(160, 32, 240, 0.1);">
+                            <td class="ps-4 text-muted fs-xs">#{{ repair.id }}</td>
+                            <td class="text-white small fw-bold">{{ repair.brand }} {{ repair.model }}</td>
+                            <td class="text-muted small">{{ repair.problem[:40] }}{% if repair.problem|length > 40
+                                %}...{% endif %}</td>
+                            <td><span class="badge bg-dark border border-purple-primary neon-text"
+                                    style="font-size: 0.6rem;">{{ repair.status }}</span></td>
+                            <td class="text-white small">{% if repair.repair_cost %}₹{{
+                                "%.0f"|format(repair.repair_cost) }}{% else %}<span class="text-muted">PENDING</span>{%
+                                endif %}</td>
+                            <td class="text-muted fs-xs">{{ repair.created_at.strftime('%Y.%m.%d') }}</td>
+                            <td class="pe-4 text-end">
+                                <a href="{{ url_for('customer.repair_detail', repair_id=repair.id) }}"
+                                    class="btn btn-cyber-outline btn-sm" style="font-size: 0.6rem;">VIEW NODE</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
         {% else %}
-        <div class="card border-0 service-card text-center py-5">
-            <p class="text-muted mb-2">No repair history yet.</p>
-            <a href="{{ url_for('customer.book_repair') }}" class="btn btn-mint">Book Your First Repair</a>
+        <div class="cyber-card text-center py-5">
+            <i class="fas fa-database fa-3x neon-text mb-4 opacity-25"></i>
+            <p class="text-muted small mb-4">No historical data detected in the sector.</p>
+            <a href="{{ url_for('customer.book_repair') }}" class="btn btn-cyber">INITIALIZE FIRST PROTOCOL</a>
         </div>
         {% endif %}
     </div>
