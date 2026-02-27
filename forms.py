@@ -58,3 +58,28 @@ class AdminRepairUpdateForm(FlaskForm):
     repair_cost = FloatField('Repair Cost (₹)', validators=[Optional()])
     admin_notes = TextAreaField('Internal Notes', validators=[Optional(), Length(max=1000)])
     submit = SubmitField('Update')
+class QuickBookingForm(FlaskForm):
+    full_name = StringField('Full Name', validators=[DataRequired(), Length(min=2, max=100)])
+    contact_phone = StringField('Phone Number', validators=[DataRequired(), Length(min=7, max=20)])
+    brand = SelectField('Mobile Brand', choices=[
+        ('Apple', 'Apple'), ('Samsung', 'Samsung'), ('OnePlus', 'OnePlus'),
+        ('Xiaomi', 'Xiaomi'), ('Oppo', 'Oppo'), ('Vivo', 'Vivo'),
+        ('Google', 'Google'), ('Motorola', 'Motorola'), ('Realme', 'Realme'),
+        ('Nothing', 'Nothing'), ('Other', 'Other')
+    ], validators=[DataRequired()])
+    model = StringField('Phone Model', validators=[DataRequired(), Length(max=100)])
+    problem = TextAreaField('Problem Description', validators=[DataRequired(), Length(max=1000)])
+    pickup_address = TextAreaField('Pickup Address', validators=[DataRequired(), Length(max=300)])
+    submit = SubmitField('Book Repair Now')
+
+class FeedbackForm(FlaskForm):
+    name = StringField('Your Name', validators=[DataRequired(), Length(min=2, max=100)])
+    message = TextAreaField('Your Feedback', validators=[DataRequired(), Length(max=1000)])
+    rating = SelectField('Rating', choices=[
+        ('5', '5 Stars - Excellent'),
+        ('4', '4 Stars - Very Good'),
+        ('3', '3 Stars - Good'),
+        ('2', '2 Stars - Fair'),
+        ('1', '1 Star - Poor')
+    ], validators=[DataRequired()])
+    submit = SubmitField('Submit Feedback')

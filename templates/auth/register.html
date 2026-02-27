@@ -2,53 +2,71 @@
 {% block title %}Register{% endblock %}
 {% block content %}
 <section class="py-5">
-    <div class="container">
+    <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card border-0 service-card">
+            <div class="col-md-7 animate-fade-in-up">
+                <div class="cyber-card">
                     <div class="card-body p-4 p-md-5">
-                        <h2 class="text-center fw-bold mb-4">Create Account</h2>
-                        <form method="POST">
+                        <div class="text-center mb-4">
+                            <h2 class="display-font text-white mb-2">NEW NODE <span class="neon-text">REGISTRY</span>
+                            </h2>
+                            <p class="text-muted small">Provision your credentials into the neural network.</p>
+                        </div>
+                        <form method="POST" class="cyber-form">
                             {{ form.hidden_tag() }}
-                            <div class="mb-3">
-                                <label class="form-label fw-500">{{ form.full_name.label.text }}</label>
-                                {{ form.full_name(class="form-control form-control-lg", placeholder="John Doe") }}
-                                {% for error in form.full_name.errors %}
-                                    <small class="text-danger">{{ error }}</small>
-                                {% endfor %}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="display-font text-white fs-xs mb-2" style="font-size: 0.6rem;">FULL
+                                        IDENTIFIER</label>
+                                    {{ form.full_name(class="form-control bg-dark border-secondary text-white",
+                                    placeholder="ALEX NEURAL") }}
+                                    {% for error in form.full_name.errors %}
+                                    <small class="text-danger fs-xs">{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="display-font text-white fs-xs mb-2" style="font-size: 0.6rem;">UPLINK
+                                        EMAIL</label>
+                                    {{ form.email(class="form-control bg-dark border-secondary text-white",
+                                    placeholder="lex@nebula.com") }}
+                                    {% for error in form.email.errors %}
+                                    <small class="text-danger fs-xs">{{ error }}</small>
+                                    {% endfor %}
+                                </div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label fw-500">{{ form.email.label.text }}</label>
-                                {{ form.email(class="form-control form-control-lg", placeholder="you@email.com") }}
-                                {% for error in form.email.errors %}
-                                    <small class="text-danger">{{ error }}</small>
-                                {% endfor %}
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-500">{{ form.phone.label.text }}</label>
-                                {{ form.phone(class="form-control form-control-lg", placeholder="+91 98765 43210") }}
+                                <label class="display-font text-white fs-xs mb-2" style="font-size: 0.6rem;">VOICE CORE
+                                    (PHONE)</label>
+                                {{ form.phone(class="form-control bg-dark border-secondary text-white", placeholder="+91
+                                000 000 0000") }}
                                 {% for error in form.phone.errors %}
-                                    <small class="text-danger">{{ error }}</small>
+                                <small class="text-danger fs-xs">{{ error }}</small>
                                 {% endfor %}
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-500">{{ form.password.label.text }}</label>
-                                    {{ form.password(class="form-control form-control-lg", placeholder="••••••") }}
+                                    <label class="display-font text-white fs-xs mb-2"
+                                        style="font-size: 0.6rem;">SECURITY KEY</label>
+                                    {{ form.password(class="form-control bg-dark border-secondary text-white",
+                                    placeholder="••••••") }}
                                     {% for error in form.password.errors %}
-                                        <small class="text-danger">{{ error }}</small>
+                                    <small class="text-danger fs-xs">{{ error }}</small>
                                     {% endfor %}
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-500">{{ form.confirm_password.label.text }}</label>
-                                    {{ form.confirm_password(class="form-control form-control-lg", placeholder="••••••") }}
+                                <div class="col-md-6 mb-4">
+                                    <label class="display-font text-white fs-xs mb-2" style="font-size: 0.6rem;">CONFIRM
+                                        KEY</label>
+                                    {{ form.confirm_password(class="form-control bg-dark border-secondary text-white",
+                                    placeholder="••••••") }}
                                     {% for error in form.confirm_password.errors %}
-                                        <small class="text-danger">{{ error }}</small>
+                                    <small class="text-danger fs-xs">{{ error }}</small>
                                     {% endfor %}
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-mint btn-lg w-100 mb-3">Register</button>
-                            <p class="text-center text-muted mb-0">Already have an account? <a href="{{ url_for('auth.login') }}" class="text-mint fw-500">Login</a></p>
+                            <button type="submit" class="btn btn-cyber w-100 mb-3">PROVISION NODE</button>
+                            <p class="text-center text-muted small mb-0">Already synced? <a
+                                    href="{{ url_for('auth.login') }}" class="neon-text text-decoration-none">LOGIN
+                                    SESSION</a></p>
                         </form>
                     </div>
                 </div>

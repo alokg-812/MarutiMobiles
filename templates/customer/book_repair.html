@@ -2,65 +2,107 @@
 {% block title %}Book a Repair{% endblock %}
 {% block content %}
 <section class="py-5">
-    <div class="container">
+    <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card border-0 service-card">
+            <div class="col-lg-10">
+                <div class="cyber-card animate-fade-in-up">
                     <div class="card-body p-4 p-md-5">
-                        <h2 class="fw-bold mb-1">Book a Repair</h2>
-                        <p class="text-muted mb-4">Fill in the details below and we'll take care of the rest.</p>
-                        <form method="POST" enctype="multipart/form-data">
+                        <div class="text-center mb-5">
+                            <h2 class="display-font text-white mb-2">REPAIR <span class="neon-text">UPLINK</span></h2>
+                            <p class="text-muted small">Submit hardware diagnostics for restoration protocol initiation.
+                            </p>
+                        </div>
+                        <form method="POST" enctype="multipart/form-data" class="cyber-form">
                             {{ form.hidden_tag() }}
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-500">{{ form.brand.label.text }}</label>
-                                    {{ form.brand(class="form-select form-select-lg") }}
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="display-font text-white fs-xs mb-2"
+                                            style="font-size: 0.6rem;">CORE ARCHITECTURE (BRAND)</label>
+                                        {{ form.brand(class="form-select bg-dark border-secondary text-white") }}
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="display-font text-white fs-xs mb-2"
+                                            style="font-size: 0.6rem;">VERSION TAG (MODEL)</label>
+                                        {{ form.model(class="form-control bg-dark border-secondary text-white",
+                                        placeholder="e.g. PH-2026 PRO") }}
+                                        {% for error in form.model.errors %}<small class="text-danger fs-xs">{{ error
+                                            }}</small>{% endfor %}
+                                    </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-500">{{ form.model.label.text }}</label>
-                                    {{ form.model(class="form-control form-control-lg", placeholder="e.g. iPhone 15 Pro") }}
-                                    {% for error in form.model.errors %}<small class="text-danger">{{ error }}</small>{% endfor %}
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-500">{{ form.problem.label.text }}</label>
-                                {{ form.problem(class="form-control", rows="3", placeholder="Describe the issue in detail...") }}
-                                {% for error in form.problem.errors %}<small class="text-danger">{{ error }}</small>{% endfor %}
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-500">{{ form.image.label.text }}</label>
-                                {{ form.image(class="form-control") }}
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-500">{{ form.pickup_address.label.text }}</label>
-                                {{ form.pickup_address(class="form-control", rows="2", placeholder="Full address for pickup") }}
-                                {% for error in form.pickup_address.errors %}<small class="text-danger">{{ error }}</small>{% endfor %}
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-500">{{ form.pickup_date.label.text }}</label>
-                                    {{ form.pickup_date(class="form-control form-control-lg", type="date") }}
-                                    {% for error in form.pickup_date.errors %}<small class="text-danger">{{ error }}</small>{% endfor %}
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-500">{{ form.pickup_time_slot.label.text }}</label>
-                                    {{ form.pickup_time_slot(class="form-select form-select-lg") }}
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="display-font text-white fs-xs mb-2"
+                                            style="font-size: 0.6rem;">ANOMALY DESCRIPTION</label>
+                                        {{ form.problem(class="form-control bg-dark border-secondary text-white",
+                                        rows="4", placeholder="Specify logic-board faults, circuit damage...") }}
+                                        {% for error in form.problem.errors %}<small class="text-danger fs-xs">{{ error
+                                            }}</small>{% endfor %}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-500">{{ form.contact_phone.label.text }}</label>
-                                    {{ form.contact_phone(class="form-control form-control-lg", placeholder="+91 98765 43210") }}
-                                    {% for error in form.contact_phone.errors %}<small class="text-danger">{{ error }}</small>{% endfor %}
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-500">{{ form.contact_email.label.text }}</label>
-                                    {{ form.contact_email(class="form-control form-control-lg", placeholder="you@email.com") }}
-                                    {% for error in form.contact_email.errors %}<small class="text-danger">{{ error }}</small>{% endfor %}
+
+                            <div class="mb-4">
+                                <label class="display-font text-white fs-xs mb-2" style="font-size: 0.6rem;">VISUAL
+                                    TELEMETRY (IMAGE)</label>
+                                {{ form.image(class="form-control bg-dark border-secondary text-white") }}
+                            </div>
+
+                            <div class="row g-4">
+                                <div class="col-md-12">
+                                    <div class="mb-4">
+                                        <label class="display-font text-white fs-xs mb-2"
+                                            style="font-size: 0.6rem;">EXTRACTION COORDINATES (ADDRESS)</label>
+                                        {{ form.pickup_address(class="form-control bg-dark border-secondary text-white",
+                                        rows="2", placeholder="Sector, Building Node, Floor...") }}
+                                        {% for error in form.pickup_address.errors %}<small class="text-danger fs-xs">{{
+                                            error }}</small>{% endfor %}
+                                    </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-mint btn-lg w-100 mt-2">
-                                <i class="fas fa-calendar-check me-2"></i>Submit Repair Request
+
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="display-font text-white fs-xs mb-2"
+                                            style="font-size: 0.6rem;">EXTRACTION DATE</label>
+                                        {{ form.pickup_date(class="form-control bg-dark border-secondary text-white",
+                                        type="date") }}
+                                        {% for error in form.pickup_date.errors %}<small class="text-danger fs-xs">{{
+                                            error }}</small>{% endfor %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="display-font text-white fs-xs mb-2"
+                                            style="font-size: 0.6rem;">TEMPORAL WINDOW (SLOT)</label>
+                                        {{ form.pickup_time_slot(class="form-select bg-dark border-secondary
+                                        text-white") }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-4 mb-5">
+                                <div class="col-md-6">
+                                    <label class="display-font text-white fs-xs mb-2"
+                                        style="font-size: 0.6rem;">COMM-LINK (PHONE)</label>
+                                    {{ form.contact_phone(class="form-control bg-dark border-secondary text-white",
+                                    placeholder="+91 --- --- ----") }}
+                                    {% for error in form.contact_phone.errors %}<small class="text-danger fs-xs">{{
+                                        error }}</small>{% endfor %}
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="display-font text-white fs-xs mb-2" style="font-size: 0.6rem;">DATA
+                                        NODE (EMAIL)</label>
+                                    {{ form.contact_email(class="form-control bg-dark border-secondary text-white",
+                                    placeholder="node@sync.com") }}
+                                    {% for error in form.contact_email.errors %}<small class="text-danger fs-xs">{{
+                                        error }}</small>{% endfor %}
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-cyber w-100 py-3">
+                                <i class="fas fa-satellite-dish me-2 pulse-glow"></i>SUBMIT PROTOCOL REQUEST
                             </button>
                         </form>
                     </div>

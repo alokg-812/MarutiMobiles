@@ -2,44 +2,49 @@
 {% block title %}How It Works{% endblock %}
 {% block content %}
 <section class="py-5">
-    <div class="container">
-        <h1 class="text-center fw-bold mb-2">How It Works</h1>
-        <p class="text-center text-muted mb-5">Getting your phone repaired is as easy as 1-2-3</p>
+    <div class="container mt-5">
+        <div class="text-center mb-5 animate-fade-in-up">
+            <h1 class="display-font text-white mb-2">Restoration <span class="neon-text">Protocol</span></h1>
+            <p class="text-muted small">A streamlined 3-phase synchronization for device recovery.</p>
+        </div>
         <div class="row g-4 justify-content-center">
-            <div class="col-md-4">
-                <div class="card step-card border-0 text-center h-100">
+            <div class="col-md-4 animate-fade-in-up">
+                <div class="cyber-card text-center h-100">
                     <div class="card-body p-4">
-                        <div class="step-number">1</div>
-                        <div class="step-icon mb-3"><i class="fas fa-calendar-check fa-3x text-mint"></i></div>
-                        <h4 class="fw-bold">Book Online</h4>
-                        <p class="text-muted">Tell us your phone brand, model, and issue. Choose a pickup date and time that works for you.</p>
+                        <div class="display-font neon-text fs-2 mb-3">01</div>
+                        <div class="step-icon mb-4"><i class="fas fa-terminal fa-3x text-white opacity-50"></i></div>
+                        <h5 class="display-font text-white small mb-3">LOG DATA</h5>
+                        <p class="text-muted small">Register your device architecture and anomaly report via our secure
+                            uplink portal.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card step-card border-0 text-center h-100">
+            <div class="col-md-4 animate-fade-in-up" style="animation-delay: 0.1s;">
+                <div class="cyber-card text-center h-100">
                     <div class="card-body p-4">
-                        <div class="step-number">2</div>
-                        <div class="step-icon mb-3"><i class="fas fa-truck-pickup fa-3x text-mint"></i></div>
-                        <h4 class="fw-bold">We Pick Up</h4>
-                        <p class="text-muted">Our team picks up your phone from your doorstep. No need to visit any store or service center.</p>
+                        <div class="display-font neon-text fs-2 mb-3">02</div>
+                        <div class="step-icon mb-4"><i class="fas fa-box-open fa-3x text-white opacity-50"></i></div>
+                        <h5 class="display-font text-white small mb-3">SECURE EXTRACTION</h5>
+                        <p class="text-muted small">Coordinated courier deployment to your coordinates for vacuum-sealed
+                            device retrieval.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card step-card border-0 text-center h-100">
+            <div class="col-md-4 animate-fade-in-up" style="animation-delay: 0.2s;">
+                <div class="cyber-card text-center h-100">
                     <div class="card-body p-4">
-                        <div class="step-number">3</div>
-                        <div class="step-icon mb-3"><i class="fas fa-check-circle fa-3x text-mint"></i></div>
-                        <h4 class="fw-bold">Repair & Deliver</h4>
-                        <p class="text-muted">Our experts fix your phone and deliver it back to you — good as new, with a 90-day warranty.</p>
+                        <div class="display-font neon-text fs-2 mb-3">03</div>
+                        <div class="step-icon mb-4"><i class="fas fa-microchip fa-3x text-white opacity-50"></i></div>
+                        <h5 class="display-font text-white small mb-3">PHASE RESTORE</h5>
+                        <p class="text-muted small">Clinical restoration in our isolated labs, followed by priority
+                            delivery and warranty validation.</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="text-center mt-5">
-            <a href="{{ url_for('customer.book_repair') }}" class="btn btn-mint btn-lg px-5">
-                <i class="fas fa-wrench me-2"></i>Get Started Now
+            <a href="{{ url_for('main.home') }}#quick-book" class="btn btn-cyber px-5">
+                <i class="fas fa-power-off me-2"></i>INITIATE PHASE 01
             </a>
         </div>
     </div>
